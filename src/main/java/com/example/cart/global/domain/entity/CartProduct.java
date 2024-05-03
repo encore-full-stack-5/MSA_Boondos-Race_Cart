@@ -41,9 +41,9 @@ public class CartProduct {
     private String productSeller;
 
     @Column(name = "PRODUCT_DELIVERY", nullable = false)
-    private String productDelivery;
+    private Integer productDelivery;
 
 
-    @OneToMany(mappedBy = "cartProduct")
+    @OneToMany(mappedBy = "cartProduct", cascade = CascadeType.REMOVE)
     private List<CartOption> cartOptions;
 }

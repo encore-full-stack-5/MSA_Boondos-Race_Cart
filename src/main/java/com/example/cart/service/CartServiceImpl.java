@@ -1,7 +1,8 @@
 package com.example.cart.service;
 
-import com.example.cart.dto.request.CartRequest;
+import com.example.cart.dto.request.CartProductRequest;
 import com.example.cart.dto.response.CartResponse;
+import com.example.cart.global.domain.entity.CartProduct;
 import com.example.cart.global.domain.repository.CartOptionRepository;
 import com.example.cart.global.domain.repository.CartProductRepository;
 import jakarta.transaction.Transactional;
@@ -13,23 +14,27 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService{
-    private final CartProductRepository productRepository;
-    private final CartOptionRepository optionRepository;
+    private final CartProductRepository cartProductRepository;
+    private final CartOptionRepository cartOptionRepository;
 
     @Override
     public List<CartResponse> getAllByUserId(Long userId) {
-        return List.of();
+        return cartProductRepository.findAllByUserId(userId)
+                .stream().map(CartResponse::from).toList();
     }
 
     @Override
     @Transactional
-    public void addProductByUserId(Long userId, CartRequest req) {
-
+    public void addProductByUserId(Long userId, CartProductRequest req) {
+        CartProduct cartProduct = req.toEntity(userId);
+        cartProductRepository.save(cartProduct);
+        cartOptionRepository.saveAll(req.getProductOptionList(cartProduct));
     }
 
     @Override
     @Transactional
-    public void removeProductByUserId(Long cartProductId) {
-
+    public void removeProductById(Long id) {
+        cartProductRepository.deleteById(id);
     }
+
 }

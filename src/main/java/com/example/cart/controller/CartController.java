@@ -1,10 +1,10 @@
 package com.example.cart.controller;
 
-import com.example.cart.dto.request.CartRequest;
+import com.example.cart.dto.request.CartProductRequest;
 import com.example.cart.dto.response.CartResponse;
-import com.example.cart.global.domain.entity.CartProduct;
 import com.example.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,18 +16,21 @@ public class CartController {
     private final CartService cartService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<CartResponse>getAllCartsByUserId(@RequestParam Long id){
         return cartService.getAllByUserId(id);
     }
 
     @PutMapping
-    public void addCart(@RequestBody CartRequest cartRequest,
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addCart(@RequestBody CartProductRequest cartProductRequest,
                         @RequestParam Long id){
-        cartService.addProductByUserId(id, cartRequest);
+        cartService.addProductByUserId(id, cartProductRequest);
     }
 
-    @DeleteMapping
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.OK)
     public void deleteCart(@RequestParam Long id){
-        cartService.removeProductByUserId(id);
+        cartService.removeProductById(id);
     }
 }
