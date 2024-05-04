@@ -18,7 +18,7 @@ public record CartResponse(
         List<CartOptionDto> productOptions
 ) {
     public static CartResponse from(CartProduct cartProduct) {
-        List<CartOptionDto> cartOptions =cartProduct.getCartOptions().isEmpty() ? null :
+        List<CartOptionDto> cartOptions = cartProduct.getCartOptions().isEmpty() ? null :
                 cartProduct.getCartOptions().stream().map(
                         cartOption -> new CartOptionDto(
                                 cartOption.getId(),

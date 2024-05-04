@@ -28,7 +28,7 @@ public class CartController {
         cartService.addProductByUserId(id, cartProductRequest);
     }
 
-    @DeleteMapping()
+    @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void deleteCart(@RequestParam Long id){
         cartService.removeProductById(id);

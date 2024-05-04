@@ -8,6 +8,7 @@ import java.util.List;
 
 public record CartProductRequest(
         Long userId,
+        Long productId,
         String productImage,
         String productName,
         Integer productPrice,
@@ -17,7 +18,16 @@ public record CartProductRequest(
         CartOptionRequest[] cartOption
 ) {
     public CartProduct toEntity(Long userId) {
-        return new CartProduct();
+        return CartProduct.builder()
+                .userId(userId)
+                .productId(productId)
+                .productImage(productImage)
+                .productName(productName)
+                .productPrice(productPrice)
+                .productQty(productQty)
+                .productSeller(productSeller)
+                .productDelivery(productDelivery)
+                .build();
     }
 
     public CartProduct toEntity(Long cartProductId, Long userId) {
