@@ -5,9 +5,10 @@ import com.example.cart.global.domain.entity.CartProduct;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public record CartProductRequest(
-        Long userId,
+        UUID userId,
         Long productId,
         String productImage,
         String productName,
@@ -17,7 +18,7 @@ public record CartProductRequest(
         Integer productDelivery,
         CartOptionRequest[] cartOption
 ) {
-    public CartProduct toEntity(Long userId) {
+    public CartProduct toEntity(UUID userId) {
         return CartProduct.builder()
                 .userId(userId)
                 .productId(productId)
@@ -30,7 +31,7 @@ public record CartProductRequest(
                 .build();
     }
 
-    public CartProduct toEntity(Long cartProductId, Long userId) {
+    public CartProduct toEntity(Long cartProductId, UUID userId) {
         return new CartProduct();
     }
 

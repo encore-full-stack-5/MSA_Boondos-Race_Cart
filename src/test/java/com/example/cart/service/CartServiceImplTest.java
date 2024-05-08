@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootTest
 @Transactional
@@ -58,17 +59,17 @@ class CartServiceImplTest {
         );
 
         // when
-        cartService.addProductByUserId(1L, req1);
-        cartService.addProductByUserId(2L, req2);
+        cartService.addProductByUserId(UUID.fromString("00000000-0000-0000-0000-000000000001"), req1);
+        cartService.addProductByUserId(UUID.fromString("00000000-0000-0000-0000-000000000002"), req2);
         em.flush();
         em.clear();
 
         // then
-        List<CartResponse> res1 = cartService.getAllByUserId(1L);
-        List<CartResponse> res2 = cartService.getAllByUserId(2L);
-        Assertions.assertEquals(res1.size(), 1);
-        Assertions.assertEquals(res1.get(0).productName(), "testName");
-        Assertions.assertEquals(res1.get(0).productOptions().get(1).optionName(), "testOption2");
+        List<CartResponse> res1 = cartService.getAllByUserId(UUID.fromString("00000000-0000-0000-0000-000000000001"));
+        List<CartResponse> res2 = cartService.getAllByUserId(UUID.fromString("00000000-0000-0000-0000-000000000002"));
+        Assertions.assertEquals(1, res1.size());
+        Assertions.assertEquals("testName", res1.get(0).productName());
+        Assertions.assertEquals("testOption2", res1.get(0).productOptions().get(1).optionName());
         Assertions.assertNull(res2.get(0).productOptions());
     }
 
@@ -97,14 +98,15 @@ class CartServiceImplTest {
                         )
                 }
         );
-        cartService.addProductByUserId(1L, req);
+        cartService.addProductByUserId(UUID.fromString("00000000-0000-0000-0000-000000000001"), req);
         em.flush();
         em.clear();
+        List<CartResponse> allByUserId = cartService.getAllByUserId(UUID.fromString("00000000-0000-0000-0000-000000000001"));
 
         // when
-        cartService.removeProductById(1L);
+        cartService.removeProductById(allByUserId.get(0).cartProductId());
 
         // then
-        Assertions.assertEquals(cartService.getAllByUserId(1L).size(), 0);
+        Assertions.assertEquals(0, cartService.getAllByUserId(UUID.fromString("00000000-0000-0000-0000-000000000001")).size());
     }
 }

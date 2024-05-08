@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,14 +18,14 @@ public class CartController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<CartResponse>getAllCartsByUserId(@RequestParam Long id){
+    public List<CartResponse>getAllCartsByUserId(@RequestParam UUID id){
         return cartService.getAllByUserId(id);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addCart(@RequestBody CartProductRequest cartProductRequest,
-                        @RequestParam Long id){
+                        @RequestParam UUID id){
         cartService.addProductByUserId(id, cartProductRequest);
     }
 

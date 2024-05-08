@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,14 +19,14 @@ public class CartServiceImpl implements CartService{
     private final CartOptionRepository cartOptionRepository;
 
     @Override
-    public List<CartResponse> getAllByUserId(Long userId) {
+    public List<CartResponse> getAllByUserId(UUID userId) {
         return cartProductRepository.findAllByUserId(userId)
                 .stream().map(CartResponse::from).toList();
     }
 
     @Override
     @Transactional
-    public void addProductByUserId(Long userId, CartProductRequest req) {
+    public void addProductByUserId(UUID userId, CartProductRequest req) {
         CartProduct cartProduct = req.toEntity(userId);
         cartProductRepository.save(cartProduct);
         cartOptionRepository.saveAll(req.getProductOptionList(cartProduct));

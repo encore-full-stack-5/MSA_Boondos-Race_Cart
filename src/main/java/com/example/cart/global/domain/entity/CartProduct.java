@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -23,7 +24,7 @@ public class CartProduct {
     private Long productId;
 
     @Column(name = "USER_ID", nullable = false)
-    private Long userId;
+    private UUID userId;
 
     @Column(name = "PRODUCT_IMAGE", nullable = false)
     private String productImage;
