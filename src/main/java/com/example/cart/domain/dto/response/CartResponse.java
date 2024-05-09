@@ -1,7 +1,6 @@
-package com.example.cart.dto.response;
+package com.example.cart.domain.dto.response;
 
-import com.example.cart.global.domain.dto.CartOptionDto;
-import com.example.cart.global.domain.entity.CartProduct;
+import com.example.cart.domain.entity.CartProduct;
 
 import java.util.List;
 
@@ -11,17 +10,20 @@ public record CartResponse(
         String productImage,
         String productName,
         Integer productPrice,
+        Integer productDiscount,
         Integer productQty,
         String productSeller,
         Integer productDelivery,
 
-        List<CartOptionDto> productOptions
+        List<CartOptionResponse> productOptions
 ) {
     public static CartResponse from(CartProduct cartProduct) {
-        List<CartOptionDto> cartOptions = cartProduct.getCartOptions().isEmpty() ? null :
+        List<CartOptionResponse> cartOptions = cartProduct.getCartOptions().isEmpty() ? null :
                 cartProduct.getCartOptions().stream().map(
-                        cartOption -> new CartOptionDto(
+                        cartOption -> new CartOptionResponse(
                                 cartOption.getId(),
+                                cartOption.getOptionGroupId(),
+                                cartOption.getOptionGroupName(),
                                 cartOption.getOptionId(),
                                 cartOption.getOptionName(),
                                 cartOption.getOptionPrice()
@@ -33,6 +35,7 @@ public record CartResponse(
                 cartProduct.getProductImage(),
                 cartProduct.getProductName(),
                 cartProduct.getProductPrice(),
+                cartProduct.getProductDiscount(),
                 cartProduct.getProductQty(),
                 cartProduct.getProductSeller(),
                 cartProduct.getProductDelivery(),

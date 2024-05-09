@@ -1,7 +1,7 @@
-package com.example.cart.dto.request;
+package com.example.cart.domain.dto.request;
 
-import com.example.cart.global.domain.entity.CartOption;
-import com.example.cart.global.domain.entity.CartProduct;
+import com.example.cart.domain.entity.CartOption;
+import com.example.cart.domain.entity.CartProduct;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +13,7 @@ public record CartProductRequest(
         String productImage,
         String productName,
         Integer productPrice,
+        Integer productDiscount,
         Integer productQty,
         String productSeller,
         Integer productDelivery,
@@ -25,6 +26,7 @@ public record CartProductRequest(
                 .productImage(productImage)
                 .productName(productName)
                 .productPrice(productPrice)
+                .productDiscount(productDiscount)
                 .productQty(productQty)
                 .productSeller(productSeller)
                 .productDelivery(productDelivery)
@@ -39,6 +41,8 @@ public record CartProductRequest(
         return Arrays.stream(this.cartOption).map(e ->
                     CartOption.builder()
                             .cartProduct(cartProduct)
+                            .optionGroupId(e.optionGroupId())
+                            .optionGroupName(e.optionGroupName())
                             .optionId(e.optionId())
                             .optionName(e.optionName())
                             .optionPrice(e.optionPrice())

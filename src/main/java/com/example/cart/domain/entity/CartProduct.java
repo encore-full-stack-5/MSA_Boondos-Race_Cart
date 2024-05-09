@@ -1,4 +1,4 @@
-package com.example.cart.global.domain.entity;
+package com.example.cart.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,6 +34,9 @@ public class CartProduct {
 
     @Column(name = "PRODUCT_PRICE", nullable = false)
     private Integer productPrice;
+
+    @Column(name = "PRODUCT_DISCOUNT", nullable = false)
+    private Integer productDiscount;
 
     @Column(name = "PRODUCT_QTY", nullable = false)
     private Integer productQty;

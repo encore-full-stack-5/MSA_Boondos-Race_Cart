@@ -1,6 +1,6 @@
-package com.example.cart.global.domain.repository;
+package com.example.cart.domain.repository;
 
-import com.example.cart.global.domain.entity.CartOption;
+import com.example.cart.domain.entity.CartOption;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CartOptionRepository

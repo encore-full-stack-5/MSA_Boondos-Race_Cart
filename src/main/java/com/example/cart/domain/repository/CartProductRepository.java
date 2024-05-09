@@ -1,6 +1,6 @@
-package com.example.cart.global.domain.repository;
+package com.example.cart.domain.repository;
 
-import com.example.cart.global.domain.entity.CartProduct;
+import com.example.cart.domain.entity.CartProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

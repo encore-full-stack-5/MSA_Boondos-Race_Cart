@@ -1,7 +1,7 @@
 package com.example.cart.controller;
 
-import com.example.cart.dto.request.CartProductRequest;
-import com.example.cart.dto.response.CartResponse;
+import com.example.cart.domain.dto.request.CartProductRequest;
+import com.example.cart.domain.dto.response.CartResponse;
 import com.example.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,21 +12,21 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/shopping/carts")
+@RequestMapping("/api/v1/carts")
 public class CartController {
     private final CartService cartService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<CartResponse>getAllCartsByUserId(@RequestParam UUID id){
-        return cartService.getAllByUserId(id);
+    public List<CartResponse>getAllCartsByUserId(@RequestParam String token){
+        return cartService.getAllByUserId(token);
     }
 
-    @PutMapping
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addCart(@RequestBody CartProductRequest cartProductRequest,
-                        @RequestParam UUID id){
-        cartService.addProductByUserId(id, cartProductRequest);
+                        @RequestParam String token){
+        cartService.addProductByUserId(token, cartProductRequest);
     }
 
     @DeleteMapping

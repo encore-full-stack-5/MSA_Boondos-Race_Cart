@@ -1,4 +1,4 @@
-package com.example.cart.global.domain.entity;
+package com.example.cart.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,12 +17,18 @@ public class CartOption {
     @Column(name = "CART_OPTION_ID")
     private Long id;
 
-    @Column(name = "OPTION_ID", nullable = false)
-    private Long optionId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CART_PRODUCT_ID", nullable = false)
     private CartProduct cartProduct;
+
+    @Column(name = "OPTION_GROUP_ID", nullable = false)
+    private Long optionGroupId;
+
+    @Column(name = "OPTIONN_GROUP_NAME", nullable = false)
+    private String optionGroupName;
+
+    @Column(name = "OPTION_ID", nullable = false)
+    private Long optionId;
 
     @Column(name = "OPTION_NAME", nullable = false)
     private String optionName;
