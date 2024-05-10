@@ -50,4 +50,12 @@ public class CartProduct {
 
     @OneToMany(mappedBy = "cartProduct", cascade = CascadeType.REMOVE)
     private List<CartOption> cartOptions;
+
+
+    public void update(CartProduct req){
+        productName = req.productName;
+        productPrice = req.productPrice;
+        productDiscount = req.productDiscount;
+        productDelivery = req.productDelivery;
+    }
 }

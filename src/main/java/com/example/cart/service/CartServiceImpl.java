@@ -2,6 +2,7 @@ package com.example.cart.service;
 
 import com.example.cart.api.ApiAuth;
 import com.example.cart.domain.dto.request.CartProductRequest;
+import com.example.cart.domain.dto.request.CartUpdateRequest;
 import com.example.cart.domain.dto.response.CartResponse;
 import com.example.cart.domain.entity.CartProduct;
 import com.example.cart.domain.repository.CartOptionRepository;
@@ -40,6 +41,13 @@ public class CartServiceImpl implements CartService{
     @Transactional
     public void removeProductById(Long id) {
         cartProductRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateProductById(Long id, CartUpdateRequest req) {
+        CartProduct cartProduct = cartProductRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        cartProduct.update(req.toEntity(id));
     }
 
 }

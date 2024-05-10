@@ -11,7 +11,6 @@ import java.util.UUID;
 public class ApiAuth {
     private final FeignAuth feignAuth;
 
-    @Async
     public UUID parseToken(String token) {
         return feignAuth.parseToken(token);
     }
