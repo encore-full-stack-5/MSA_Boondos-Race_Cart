@@ -1,8 +1,8 @@
 server:
-  port: 9002
+  port: 0
 spring:
   application:
-    name: shopping-cart-service
+    name: cart-service
   datasource:
     url: jdbc:postgresql://localhost:5432/naver_db?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     password: 1234
@@ -14,11 +14,11 @@ spring:
     properties:
       hibernate:
         default_batch_fetch_size: 100
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://192.168.80.38:8765/eureka/
-#  instance:
-#    instance-id: shopping-cart
-#    prefer-ip-address: true
-#    ip-address: 192.168.0.16
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.0.33:8761/eureka/
+  instance:
+    instance-id: cart-service
+    prefer-ip-address: true
+    ip-address: 192.168.0.16
