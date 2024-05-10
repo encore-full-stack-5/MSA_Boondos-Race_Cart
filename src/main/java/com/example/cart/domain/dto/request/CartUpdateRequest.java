@@ -3,6 +3,7 @@ package com.example.cart.domain.dto.request;
 import com.example.cart.domain.entity.CartProduct;
 
 public record CartUpdateRequest (
+        Long productId,
         String productName,
         Integer productPrice,
         Integer productDiscount,
@@ -11,6 +12,7 @@ public record CartUpdateRequest (
     public CartProduct toEntity(Long id) {
         return CartProduct.builder()
                 .id(id)
+                .productId(productId)
                 .productName(productName)
                 .productPrice(productPrice)
                 .productDiscount(productDiscount)

@@ -11,5 +11,5 @@ public interface CartService {
     List<CartResponse> getAllByUserId( String token);
     void addProductByUserId( String token, CartProductRequest req);
     void removeProductById(Long id);
-    void updateProductById(Long id, CartUpdateRequest req);
+    void updateProductById(CartUpdateRequest req);
 }

@@ -1,6 +1,7 @@
 package com.example.cart.controller;
 
 import com.example.cart.domain.dto.request.CartProductRequest;
+import com.example.cart.domain.dto.request.CartUpdateRequest;
 import com.example.cart.domain.dto.response.CartResponse;
 import com.example.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +34,11 @@ public class CartController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteCart(@RequestParam Long id){
         cartService.removeProductById(id);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void updateProduct(@RequestBody CartUpdateRequest req) {
+        cartService.updateProductById(req);
     }
 }

@@ -45,9 +45,9 @@ public class CartServiceImpl implements CartService{
 
     @Override
     @Transactional
-    public void updateProductById(Long id, CartUpdateRequest req) {
-        CartProduct cartProduct = cartProductRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        cartProduct.update(req.toEntity(id));
+    public void updateProductById(CartUpdateRequest req) {
+//        CartProduct cartProduct = cartProductRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+//        cartProduct.update(req.toEntity(id));
     }
 
 }
