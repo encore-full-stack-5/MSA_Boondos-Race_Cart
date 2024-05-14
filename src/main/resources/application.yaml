@@ -9,7 +9,7 @@ spring:
     username: naver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
@@ -17,7 +17,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://192.168.0.33:8761/eureka/
+      defaultZone: http://192.168.0.16:8761/eureka/
   instance:
     instance-id: cart-service
     prefer-ip-address: true

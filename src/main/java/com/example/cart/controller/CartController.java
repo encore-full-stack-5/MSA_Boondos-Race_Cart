@@ -19,20 +19,20 @@ public class CartController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<CartResponse>getAllCartsByUserId(@RequestParam String token){
+    public List<CartResponse>getAllCartsByUserId(@RequestParam("token") String token){
         return cartService.getAllByUserId(token);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addCart(@RequestBody CartProductRequest cartProductRequest,
-                        @RequestParam String token){
+                        @RequestParam("token") String token){
         cartService.addProductByUserId(token, cartProductRequest);
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    public void deleteCart(@RequestParam Long id){
+    public void deleteCart(@RequestParam("id") Long id){
         cartService.removeProductById(id);
     }
 

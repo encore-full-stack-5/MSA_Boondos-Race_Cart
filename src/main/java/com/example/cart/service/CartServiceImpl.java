@@ -4,6 +4,7 @@ import com.example.cart.api.ApiAuth;
 import com.example.cart.domain.dto.request.CartProductRequest;
 import com.example.cart.domain.dto.request.CartUpdateRequest;
 import com.example.cart.domain.dto.response.CartResponse;
+import com.example.cart.domain.dto.response.TokenInfoResponse;
 import com.example.cart.domain.entity.CartProduct;
 import com.example.cart.domain.repository.CartOptionRepository;
 import com.example.cart.domain.repository.CartProductRepository;
@@ -23,16 +24,16 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public List<CartResponse> getAllByUserId(String token) {
-        UUID uuid = apiAuth.parseToken(token);
-        return cartProductRepository.findAllByUserId(uuid)
+        TokenInfoResponse user = apiAuth.parseToken(token);
+        return cartProductRepository.findAllByUserId(user.id())
                 .stream().map(CartResponse::from).toList();
     }
 
     @Override
     @Transactional
     public void addProductByUserId(String token, CartProductRequest req) {
-        UUID uuid = apiAuth.parseToken(token);
-        CartProduct cartProduct = req.toEntity(uuid);
+        TokenInfoResponse user = apiAuth.parseToken(token);
+        CartProduct cartProduct = req.toEntity(user.id());
         cartProductRepository.save(cartProduct);
         cartOptionRepository.saveAll(req.getProductOptionList(cartProduct));
     }
